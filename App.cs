@@ -1,0 +1,154 @@
+﻿using EmaptaLoginAutomation.Enums;
+using EmaptaLoginAutomation.Interfaces;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+
+namespace EmaptaLoginAutomation
+{
+    public class App(ILoggerService logger,
+        IComponentService componentService,
+        IConnectionService connectionService,
+        IAttendanceService attendanceService,
+        IEmailNotificationService emailService,
+        ChromeDriver driver)
+    {
+        public void Run()
+        {
+            // Check if there's internet connection
+            if (!connectionService.HasInternetConnection())
+            {
+                return;
+            }
+
+            // Go to Emapta Website
+            driver.Navigate().GoToUrl("https://portal.empowerteams.io/login");
+
+
+            // REMOVED ONCE DONE TESTING
+            logger.Log($"THIS IS A TEST TO CHECK IF GA WILL WORK {DateTime.Now.ToString("g")}");
+
+            return;
+
+            // Login
+            var username = "";
+            var password = "";
+
+            if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
+            {
+                logger.Log("Invalid login credentials");
+
+                return;
+            }
+
+            if (!HasLoggedIn(username, password))
+            {
+                return;
+            }
+
+            // Check Restday/Leave
+            if (attendanceService.IsRestDay())
+            {
+                logger.Log("TODAY IS YOUR REST DAY!");
+                emailService.SendEmail("Rest Day", "Don't bother working");
+
+                return;
+            }
+
+            // Check Shift
+            if (attendanceService.IsShiftCompleted())
+            {
+                logger.Log($"Your shift has already completed");
+                emailService.SendEmail("Shift Completed", $"Your shift has already completed");
+
+                return;
+            }
+
+            if (attendanceService.IsShiftStarting())
+            {
+                ProcessClockIn();
+                return;
+            }
+
+            if (attendanceService.IsShiftEnding())
+            {
+                ProcessClockOut();
+                return;
+            }
+
+            logger.Log($"Shift not yet starting");
+            emailService.SendEmail("Shift not starting", $"Your shift is not yet starting");
+        }
+
+        // Private Methods
+        private void ProcessClockIn()
+        {
+            var attendance = attendanceService.ClockIn();
+
+            if (attendance.HasClockedIn)
+            {
+                logger.Log("Clocked In Successfully!");
+                emailService.SendEmail("Clock In", $"Clocked in at {DateTime.Now:t}");
+                return;
+            }
+
+            emailService.SendEmail("Failed", $"Clock In Unsuccessful");
+        }
+        private void ProcessClockOut()
+        {
+            var attendance = attendanceService.ClockOut();
+
+            if (attendance.HasClockedOut)
+            {
+                logger.Log("Clocked Out Successfully!");
+                emailService.SendEmail("Clock Out", $"Clocked out at {DateTime.Now:t}");
+                return;
+            }
+
+            emailService.SendEmail("Failed", $"Clock Out Unsuccessful");
+        }
+        private bool HasLoggedIn(string userName, string password)
+        {
+            var loginButtonName = "//button[text()='Login as Employee']";
+            var loginButton = componentService.GetComponent(loginButtonName, GetBy.XPath, 10_000);
+            if (loginButton is null)
+            {
+                emailService.SendEmail("Failed", "Login didn't load :(");
+
+                return false;
+            }
+
+            loginButton.Click();
+
+            var flutter = componentService.GetComponent("flutter-view", GetBy.Tag, 30_000);
+            if (flutter is null)
+            {
+                emailService.SendEmail("Failed", "UserName page didn't load :(");
+
+                return false;
+            }
+
+            flutter.SendKeys(Keys.Tab);
+            flutter.SendKeys(userName);
+            flutter.SendKeys(Keys.Tab);
+            flutter.SendKeys(Keys.Enter);
+
+            Thread.Sleep(2_000);
+
+            flutter.SendKeys(Keys.Tab);
+            flutter.SendKeys(password);
+            flutter.SendKeys(Keys.Tab);
+            flutter.SendKeys(Keys.Enter);
+
+            Thread.Sleep(10_000);
+
+            loginButton = componentService.GetComponent(loginButtonName, GetBy.XPath, 30_000);
+            if (loginButton != null)
+            {
+                loginButton.Click();
+                Thread.Sleep(5_000);
+            }
+
+            return true;
+        }
+    }
+}

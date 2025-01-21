@@ -1,0 +1,35 @@
+name: Run DTR
+
+on:
+  schedule:
+    # Run every weekday at 8 AM and 5 PM
+    - cron: '0 0,9 * * 1-5'
+  workflow_dispatch:
+
+jobs:
+  process:
+    runs-on: windows-latest
+
+    steps:
+    - name: Install Chrome
+      run: choco install googlechrome -y
+
+    - name: Install ChromeDriver
+      run: choco install chromedriver -y
+
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '8.0.x'
+
+    - name: Install dependencies
+      run: dotnet restore
+
+    - name: Build the application
+      run: dotnet build --configuration Release --no-restore
+
+    - name: Run the executable
+      run: ./bin/Release/net8.0/EmaptaLoginAutomation.exe # Adjust this path if necessary
