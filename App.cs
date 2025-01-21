@@ -24,15 +24,9 @@ namespace EmaptaLoginAutomation
             driver.Navigate().GoToUrl("https://portal.empowerteams.io/login");
 
 
-            // REMOVED ONCE DONE TESTING
-            logger.Log($"THIS IS A TEST TO CHECK IF GA WILL WORK {DateTime.Now.ToString("g")}");
-            logger.Log($"{Environment.GetEnvironmentVariable("PRIMARY_USERNAME")}");
-
-            return;
-
             // Login
-            var username = "";
-            var password = "";
+            var username = $"{Environment.GetEnvironmentVariable("PRIMARY_USERNAME")}";
+            var password = $"{Environment.GetEnvironmentVariable("PRIMARY_PASSWORD")}";
 
             if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
             {
