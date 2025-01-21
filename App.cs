@@ -26,6 +26,7 @@ namespace EmaptaLoginAutomation
 
             // REMOVED ONCE DONE TESTING
             logger.Log($"THIS IS A TEST TO CHECK IF GA WILL WORK {DateTime.Now.ToString("g")}");
+            logger.Log($"{Environment.GetEnvironmentVariable("PRIMARY_USERNAME")}");
 
             return;
 
