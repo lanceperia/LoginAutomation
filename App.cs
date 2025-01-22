@@ -113,7 +113,7 @@ namespace EmaptaLoginAutomation
 
             loginButton.Click();
 
-            var flutter = componentService.GetComponent("flutter-view", GetBy.Tag, 30_000);
+            var flutter = componentService.GetComponent("flutter-view", GetBy.Tag, 60_000);
             if (flutter is null)
             {
                 emailService.SendEmail("Failed", "UserName page didn't load :(");
