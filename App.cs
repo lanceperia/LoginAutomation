@@ -85,7 +85,7 @@ namespace EmaptaLoginAutomation
                 return;
             }
 
-            emailService.SendEmail("Failed", $"Clock In Unsuccessful");
+            emailService.SendEmail("Failed", $"Clock In failed");
         }
         private void ProcessClockOut()
         {
@@ -98,7 +98,7 @@ namespace EmaptaLoginAutomation
                 return;
             }
 
-            emailService.SendEmail("Failed", $"Clock Out Unsuccessful");
+            emailService.SendEmail("Failed", $"Clock Out failed");
         }
         private bool HasLoggedIn(string userName, string password)
         {
