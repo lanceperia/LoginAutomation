@@ -43,13 +43,13 @@ namespace EmaptaLoginAutomation.Services
         public bool IsShiftStarting()
         {
             return componentService
-                .GetComponent(ClockInElementName, GetBy.Class, 5_000) is not null;
+                .GetComponent(ClockInElementName, GetBy.Id, 5_000) is not null;
         }
 
         public bool IsShiftEnding()
         {
             return componentService
-                .GetComponent(ClockOutElementName, GetBy.Id, 5_000) is not null;
+                .GetComponent(ClockOutElementName, GetBy.Class, 5_000) is not null;
         }
 
         public bool IsShiftCompleted()

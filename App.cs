@@ -23,7 +23,6 @@ namespace EmaptaLoginAutomation
             // Go to Emapta Website
             driver.Navigate().GoToUrl("https://portal.empowerteams.io/login");
 
-
             // Login
             var username = $"{Environment.GetEnvironmentVariable("PRIMARY_USERNAME")}";
             var password = $"{Environment.GetEnvironmentVariable("PRIMARY_PASSWORD")}";

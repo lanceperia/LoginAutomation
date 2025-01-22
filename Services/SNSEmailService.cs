@@ -1,7 +1,6 @@
 ﻿using Amazon.SimpleNotificationService;
 using Amazon.SimpleNotificationService.Model;
 using EmaptaLoginAutomation.Interfaces;
-using Microsoft.Extensions.Configuration;
 
 namespace EmaptaLoginAutomation.Services
 {
