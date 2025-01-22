@@ -1,9 +1,9 @@
 name: Run DTR
 
 on:
-  schedule:
+  #schedule:
     # Run every weekday at 8 AM and 5 PM
-    - cron: '0 0,9 * * 1-5'
+    #- cron: '0 0,9 * * 1-5'
   workflow_dispatch:
 
 jobs:
