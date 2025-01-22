@@ -8,9 +8,9 @@ namespace EmaptaLoginAutomation.Services
     {
         public void SendEmail(string subject, string message)
         {
-            var accessKeyId = Environment.GetEnvironmentVariable("AWS_ACCESS_KEY_ID");
-            var secretAccessKey = Environment.GetEnvironmentVariable("AWS_SECRET_ACCESS_KEY");
-            var topicArn = Environment.GetEnvironmentVariable("AWS_SNS_ARN");
+            var accessKeyId = Environment.GetEnvironmentVariable("PERSONAL_AWS_ACCESS_KEY_ID");
+            var secretAccessKey = Environment.GetEnvironmentVariable("PERSONAL_AWS_SECRET_ACCESS_KEY");
+            var topicArn = Environment.GetEnvironmentVariable("PERSONAL_AWS_SNS_ARN");
             var client = new AmazonSimpleNotificationServiceClient(accessKeyId, secretAccessKey);
             
             loggerService.Log($"Variables: {topicArn}");

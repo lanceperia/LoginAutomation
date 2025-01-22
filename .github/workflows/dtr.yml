@@ -40,8 +40,8 @@ jobs:
         $env:PRIMARY_PASSWORD = '${{secrets.PRIMARY_PASSWORD}}'
         ./bin/Release/net8.0/EmaptaLoginAutomation.exe
       env:
-        AWS_ACCESS_KEY_ID : ${{secrets.AWS_ACCESS_KEY_ID}}
-        AWS_SECRET_ACCESS_KEY : ${{secrets.AWS_SECRET_ACCESS_KEY}}
-        AWS_SNS_ARN : ${{secrets.AWS_SNS_ARN}}
+        PERSONAL_AWS_ACCESS_KEY_ID : ${{secrets.AWS_ACCESS_KEY_ID}}
+        PERSONAL_AWS_SECRET_ACCESS_KEY : ${{secrets.AWS_SECRET_ACCESS_KEY}}
+        PERSONAL_AWS_SNS_ARN : ${{secrets.AWS_SNS_ARN}}
         PRIMARY_USERNAME : ${{secrets.PRIMARY_USERNAME}}
         PRIMARY_PASSWORD : ${{secrets.PRIMARY_PASSWORD}}
