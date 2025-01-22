@@ -1,4 +1,5 @@
-﻿using Amazon.SimpleNotificationService;
+﻿using Amazon;
+using Amazon.SimpleNotificationService;
 using Amazon.SimpleNotificationService.Model;
 using EmaptaLoginAutomation.Interfaces;
 
@@ -11,7 +12,7 @@ namespace EmaptaLoginAutomation.Services
             var accessKeyId = Environment.GetEnvironmentVariable("PERSONAL_AWS_ACCESS_KEY_ID");
             var secretAccessKey = Environment.GetEnvironmentVariable("PERSONAL_AWS_SECRET_ACCESS_KEY");
             var topicArn = Environment.GetEnvironmentVariable("PERSONAL_AWS_SNS_ARN");
-            var client = new AmazonSimpleNotificationServiceClient(accessKeyId, secretAccessKey);
+            var client = new AmazonSimpleNotificationServiceClient(accessKeyId, secretAccessKey,RegionEndpoint.APSoutheast1);
             
             loggerService.Log($"Variables: {topicArn}");
 
