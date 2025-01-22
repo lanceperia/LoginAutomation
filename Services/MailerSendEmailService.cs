@@ -19,10 +19,10 @@ namespace EmaptaLoginAutomation.Services
 
             if (string.IsNullOrWhiteSpace(token) || string.IsNullOrWhiteSpace(sender))
             {
-                loggerService.Log("ERROR (MailerSendEmailService): No Token/Sender found");
+                loggerService.Error("(MailerSendEmailService): No Token/Sender found");
             }
 
-            loggerService.Log("Sending email...");
+            loggerService.Information("Sending email...");
 
             var recipients = configuration.GetSection("MailerSend:Recipients").GetChildren().Select(r => r.Value).ToList();
             var client = new HttpClient();
@@ -58,11 +58,11 @@ namespace EmaptaLoginAutomation.Services
             var result = response.Content.ReadAsStringAsync().Result;
             if (response.IsSuccessStatusCode)
             {
-                loggerService.Log("Email sent");
+                loggerService.Information("Email sent");
                 return;
             }
 
-            loggerService.Log($"ERROR (MailerSendEmailService): Email was not sent {response.StatusCode} ({response.ReasonPhrase}) -- {result}");
+            loggerService.Error($"(MailerSendEmailService): Email was not sent {response.StatusCode} ({response.ReasonPhrase}) -- {result}");
         }
     }
 }

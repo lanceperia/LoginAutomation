@@ -66,22 +66,22 @@ namespace EmaptaLoginAutomation.Services
                 var component = componentService.GetComponent(componentName, getBy, timeOut: 10_000);
                 if (component is not null)
                 {
-                    logger.Log($"Clicking {componentName}");
+                    logger.Information($"Clicking {componentName}");
 
                     component.Click();
 
-                    logger.Log($"Successfully clicked {componentName}");
+                    logger.Information($"Successfully clicked {componentName}");
 
                     return true;
                 }
 
-                logger.Log($"Component is null");
+                logger.Information($"Component is null");
 
                 return false;
             }
             catch (Exception e)
             {
-                logger.Log($"ERROR: {e.Message}");
+                logger.Error(e.Message);
 
                 return false;
             }

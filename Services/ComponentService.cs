@@ -32,7 +32,7 @@ namespace EmaptaLoginAutomation.Services
                         break;
                 }
 
-                logger.Log($"Waiting for {elementName} to load...");
+                logger.Information($"Waiting for {elementName} to load...");
 
                 var wait = new DefaultWait<IWebDriver>(driver)
                 {
@@ -47,12 +47,12 @@ namespace EmaptaLoginAutomation.Services
                     return el.Displayed ? el : null;
                 });
 
-                logger.Log($"{elementName} found: {element is not null}");
+                logger.Information($"{elementName} found: {element is not null}");
                 return element;
             }
             catch (Exception)
             {
-                logger.Log($"ERROR: {elementName} not found");
+                logger.Error($"{elementName} not found");
                 return null;
             }
         }

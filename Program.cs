@@ -27,7 +27,7 @@ namespace EmaptaLoginAutomation
             }
             catch (Exception e)
             {
-                logger.Log($"EXCEPTION: {e.Message} -- {e.StackTrace}");
+                logger.Error($"EXCEPTION: {e.Message} -- {e.StackTrace}");
             }
 
             // Close browser
@@ -63,7 +63,7 @@ namespace EmaptaLoginAutomation
             var logger = provider.GetRequiredService<ILoggerService>();
             var driver = provider.GetRequiredService<ChromeDriver>();
 
-            logger.Log("Closing browser...");
+            logger.Information("Closing browser...");
             driver.Quit();
         }
 

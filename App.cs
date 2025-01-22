@@ -29,7 +29,7 @@ namespace EmaptaLoginAutomation
 
             if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
             {
-                logger.Log("Invalid login credentials");
+                logger.Information("Invalid login credentials");
 
                 return;
             }
@@ -42,7 +42,7 @@ namespace EmaptaLoginAutomation
             // Check Restday/Leave
             if (attendanceService.IsRestDay())
             {
-                logger.Log("TODAY IS YOUR REST DAY!");
+                logger.Information("TODAY IS YOUR REST DAY!");
                 emailService.SendEmail("Rest Day", "Don't bother working");
 
                 return;
@@ -51,7 +51,7 @@ namespace EmaptaLoginAutomation
             // Check Shift
             if (attendanceService.IsShiftCompleted())
             {
-                logger.Log($"Your shift has already completed");
+                logger.Information($"Your shift has already completed");
                 emailService.SendEmail("Shift Completed", $"Your shift has already completed");
 
                 return;
@@ -69,7 +69,7 @@ namespace EmaptaLoginAutomation
                 return;
             }
 
-            logger.Log($"Shift not yet starting");
+            logger.Information($"Shift not yet starting");
             emailService.SendEmail("Shift not starting", $"Your shift is not yet starting");
         }
 
@@ -80,7 +80,7 @@ namespace EmaptaLoginAutomation
 
             if (attendance.HasClockedIn)
             {
-                logger.Log("Clocked In Successfully!");
+                logger.Information("Clocked In Successfully!");
                 emailService.SendEmail("Clock In", $"Clocked in at {DateTime.Now:t}");
                 return;
             }
@@ -93,7 +93,7 @@ namespace EmaptaLoginAutomation
 
             if (attendance.HasClockedOut)
             {
-                logger.Log("Clocked Out Successfully!");
+                logger.Information("Clocked Out Successfully!");
                 emailService.SendEmail("Clock Out", $"Clocked out at {DateTime.Now:t}");
                 return;
             }

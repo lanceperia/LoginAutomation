@@ -11,7 +11,7 @@ namespace EmaptaLoginAutomation.Services
 
             while (!hasInternetConnection && counter <= 4)
             {
-                logger.Log($"Checking internet connection... ({counter})");
+                logger.Information($"Checking internet connection... ({counter})");
 
                 try
                 {
@@ -21,13 +21,13 @@ namespace EmaptaLoginAutomation.Services
 
                     if (response.IsSuccessStatusCode)
                     {
-                        logger.Log($"Successfully connected to the internet...");
+                        logger.Information($"Successfully connected to the internet...");
                         return true;
                     }
                 }
                 catch
                 {
-                    logger.Log($"No connection will retry...");
+                    logger.Information($"No connection will retry...");
                 }
 
                 counter++;
@@ -35,7 +35,7 @@ namespace EmaptaLoginAutomation.Services
                 Thread.Sleep(30000);
             }
 
-            logger.Log($"ERROR: No Internet Connection...");
+            logger.Error($"No Internet Connection...");
             return false;
         }
     }

@@ -2,6 +2,7 @@
 {
     public interface ILoggerService
     {
-        void Log(string message);
+        void Information(string message);
+        void Error(string message);
     }
 }
