@@ -126,6 +126,7 @@ namespace EmaptaLoginAutomation
             flutter.SendKeys(Keys.Tab);
             flutter.SendKeys(Keys.Enter);
 
+            logger.Information("Username entered");
             Thread.Sleep(2_000);
 
             flutter.SendKeys(Keys.Tab);
@@ -133,6 +134,7 @@ namespace EmaptaLoginAutomation
             flutter.SendKeys(Keys.Tab);
             flutter.SendKeys(Keys.Enter);
 
+            logger.Information("Logging in...");
             Thread.Sleep(10_000);
 
             loginButton = componentService.GetComponent(loginButtonName, GetBy.XPath, 30_000);
