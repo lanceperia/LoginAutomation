@@ -10,5 +10,6 @@ namespace EmaptaLoginAutomation.Interfaces
         bool IsShiftEnding();
         bool IsShiftCompleted();
         bool IsRestDay();
+        bool IsOnLeave();
     }
 }

@@ -40,6 +40,15 @@ namespace EmaptaLoginAutomation.Services
                 dtrDescription.Text.Contains("Today is your rest day");
         }
 
+        public bool IsOnLeave()
+        {
+            var dtrDescription = componentService
+                           .GetComponent("dtr-description", GetBy.Class);
+
+            return dtrDescription != null &&
+                dtrDescription.Text.Contains("You are on leave today");
+        }
+
         public bool IsShiftStarting()
         {
             return componentService
@@ -57,6 +66,7 @@ namespace EmaptaLoginAutomation.Services
             return componentService
                 .GetComponent("button-shiftended", GetBy.Class, 5_000) is not null;
         }
+
 
         // Private Method
         private bool ProcessAttendance(string componentName, GetBy getBy)

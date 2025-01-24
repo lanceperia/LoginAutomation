@@ -39,11 +39,11 @@ namespace EmaptaLoginAutomation
                 return;
             }
 
-            // Check Restday/Leave
-            if (attendanceService.IsRestDay())
+            // Check Restday
+            if (attendanceService.IsRestDay() || attendanceService.IsOnLeave())
             {
                 logger.Information("TODAY IS YOUR REST DAY!");
-                emailService.SendEmail("Rest Day", "Don't bother working");
+                emailService.SendEmail("Rest Day", "Today is your rest day. Don't bother working");
 
                 return;
             }
