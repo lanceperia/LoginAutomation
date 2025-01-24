@@ -1,11 +1,11 @@
 name: Run DTR
 
 on:
-  schedule:
+  #schedule:
     # 7:30 AM PST (11:30 PM UTC the previous day)
-    - cron: '30 23 * * 0-4'
+    #- cron: '30 23 * * 0-4'
     # 5:00 PM PST (9:00 AM UTC the same day)
-    - cron: '0 9 * * 1-5'
+    #- cron: '0 9 * * 1-5'
   workflow_dispatch:
 
 jobs:
