@@ -40,7 +40,9 @@ namespace EmaptaLoginAutomation
             }
 
             // Check Restday
-            if (attendanceService.IsRestDay() || attendanceService.IsOnLeave())
+            if (attendanceService.IsRestDay() || 
+                attendanceService.IsOnLeave() ||
+                attendanceService.IsHoliday())
             {
                 logger.Information("TODAY IS YOUR REST DAY!");
                 emailService.SendEmail("Rest Day", "Today is your rest day. Don't bother working");
