@@ -34,13 +34,13 @@ namespace EmaptaLoginAutomation
                 return;
             }
 
-            if (!HasLoggedIn(username, password))
+            if (IsSessionExpired() && !HasLoggedIn(username, password))
             {
                 return;
             }
 
             // Check Restday
-            if (attendanceService.IsRestDay() || 
+            if (attendanceService.IsRestDay() ||
                 attendanceService.IsOnLeave() ||
                 attendanceService.IsHoliday())
             {
@@ -102,10 +102,17 @@ namespace EmaptaLoginAutomation
 
             emailService.SendEmail("Failed", $"Clock Out failed");
         }
+        private bool IsSessionExpired()
+        {
+            var loginButtonName = "//button[text()='Login as Employee']";
+            var loginButton = componentService.GetComponent(loginButtonName, GetBy.XPath, 5_000);
+
+            return loginButton is not null;
+        }
         private bool HasLoggedIn(string userName, string password)
         {
             var loginButtonName = "//button[text()='Login as Employee']";
-            var loginButton = componentService.GetComponent(loginButtonName, GetBy.XPath, 10_000);
+            var loginButton = componentService.GetComponent(loginButtonName, GetBy.XPath, 60_000);
             if (loginButton is null)
             {
                 emailService.SendEmail("Failed", "Login didn't load :(");
@@ -115,7 +122,7 @@ namespace EmaptaLoginAutomation
 
             loginButton.Click();
 
-            var flutter = componentService.GetComponent("flutter-view", GetBy.Tag, 60_000);
+            var flutter = componentService.GetComponent("flutter-view", GetBy.Tag, 300_000);
             if (flutter is null)
             {
                 emailService.SendEmail("Failed", "UserName page didn't load :(");

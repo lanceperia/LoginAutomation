@@ -47,7 +47,13 @@ namespace EmaptaLoginAutomation
             });
             services.AddSingleton(provider =>
             {
-                return new ChromeDriver();
+                var options = new ChromeOptions();
+
+                options.AddArguments(@"user-data-dir=C:\Users\LancePeria\AppData\Local\Google\Chrome\User Data");
+                options.AddArguments(@"profile-directory=Default");
+
+
+                return new ChromeDriver(options);
             });
 
             // Register other services
