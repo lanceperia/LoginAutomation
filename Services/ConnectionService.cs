@@ -6,10 +6,8 @@ namespace EmaptaLoginAutomation.Services
     {
         public bool HasInternetConnection()
         {
-            var hasInternetConnection = false;
             var counter = 1;
-
-            while (!hasInternetConnection && counter <= 4)
+            while (counter <= 5)
             {
                 logger.Information($"Checking internet connection... ({counter})");
 
@@ -32,10 +30,10 @@ namespace EmaptaLoginAutomation.Services
 
                 counter++;
 
-                Thread.Sleep(30000);
+                Thread.Sleep(30_000);
             }
 
-            logger.Error($"No Internet Connection...");
+            logger.Error($"NO INTERNET CONNECTION :(");
             return false;
         }
     }
