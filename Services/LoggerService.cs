@@ -20,7 +20,7 @@ namespace EmaptaLoginAutomation.Services
         {
             var path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             var filePath = $"{path}/logs.txt";
-            var time = DateTime.Now.ToString("T");
+            var time = DateTime.Now.ToString("G");
             var messageType = !isError ? "INF" : "ERR";
 
             try
