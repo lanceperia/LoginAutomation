@@ -23,20 +23,9 @@ namespace EmaptaLoginAutomation
             // Go to Emapta Website
             driver.Navigate().GoToUrl("https://portal.empowerteams.io/login");
 
-            // Login
-            var username = $"{Environment.GetEnvironmentVariable("PRIMARY_USERNAME")}";
-            var password = $"{Environment.GetEnvironmentVariable("PRIMARY_PASSWORD")}";
-
-            if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
+            if (IsSessionExpired())
             {
-                logger.Information("Invalid login credentials");
-
-                return;
-            }
-
-            if (IsSessionExpired() && !HasLoggedIn(username, password))
-            {
-                return;
+                emailService.SendEmail("Failed", "Session's expired :(");
             }
 
             // Check Restday
@@ -54,7 +43,7 @@ namespace EmaptaLoginAutomation
             if (attendanceService.IsShiftCompleted())
             {
                 logger.Information($"Your shift has already completed");
-                emailService.SendEmail("Shift Completed", $"Your shift has already completed");
+                emailService.SendEmail("Shift Completed", "Your shift has already completed");
 
                 return;
             }
