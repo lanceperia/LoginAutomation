@@ -26,6 +26,8 @@ namespace EmaptaLoginAutomation
             if (IsSessionExpired())
             {
                 emailService.SendEmail("Failed", "Session's expired :(");
+
+                return;
             }
 
             // Check Restday

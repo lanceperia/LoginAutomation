@@ -71,6 +71,8 @@ namespace EmaptaLoginAutomation.Services
             var dtrDescription = componentService
                            .GetComponent("dtr-description", GetBy.Class);
 
+            logger.Information($"Finding {message}");
+
             return dtrDescription != null &&
                 !dtrDescription.Text.Contains(message);
         }
