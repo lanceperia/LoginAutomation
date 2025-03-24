@@ -33,17 +33,17 @@ namespace EmaptaLoginAutomation.Services
 
         public bool IsRestDay()
         {
-            return !IsWorkingDay("Today is your rest day");
+            return IsDayOff("Today is your rest day");
         }
 
         public bool IsHoliday()
         {
-            return !IsWorkingDay("Today is holiday");
+            return IsDayOff("Today is holiday");
         }
 
         public bool IsOnLeave()
         {
-            return !IsWorkingDay("You are on leave today");
+            return IsDayOff("You are on leave today");
         }
 
         public bool IsShiftStarting()
@@ -66,7 +66,7 @@ namespace EmaptaLoginAutomation.Services
 
 
         // Private Method
-        private bool IsWorkingDay(string message)
+        private bool IsDayOff(string message)
         {
             var dtrDescription = componentService
                            .GetComponent("dtr-description", GetBy.Class);
@@ -74,7 +74,7 @@ namespace EmaptaLoginAutomation.Services
             logger.Information($"Finding {message}");
 
             return dtrDescription != null &&
-                !dtrDescription.Text.Contains(message);
+                dtrDescription.Text.Contains(message);
         }
         private bool ProcessAttendance(string componentName, GetBy getBy)
         {
