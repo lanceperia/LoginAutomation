@@ -48,10 +48,10 @@ namespace EmaptaLoginAutomation
             services.AddSingleton(provider =>
             {
                 var options = new ChromeOptions();
-                var chromeExePath = Environment.GetEnvironmentVariable("CHROME_EXEPATH");
-                var chromeProfilePath = Environment.GetEnvironmentVariable("CHROME_PROFILEPATH");
+                var chromeUserDataDir = Environment.GetEnvironmentVariable("CHROME_USERDATADIR");
+                var chromeProfilePath = Environment.GetEnvironmentVariable("CHROME_PROFILEDIR");
 
-                options.AddArguments($"user-data-dir={chromeExePath}");
+                options.AddArguments($"user-data-dir={chromeUserDataDir}");
                 options.AddArguments($"profile-directory={chromeProfilePath}");
 
                 return new ChromeDriver(options);
