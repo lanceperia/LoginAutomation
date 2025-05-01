@@ -48,16 +48,18 @@ namespace EmaptaLoginAutomation
             services.AddSingleton(provider =>
             {
                 var options = new ChromeOptions();
+                var chromeExePath = Environment.GetEnvironmentVariable("CHROME_EXEPATH");
+                var chromeProfilePath = Environment.GetEnvironmentVariable("CHROME_PROFILEPATH");
 
-                options.AddArguments(@"user-data-dir=C:\Users\LancePeria\AppData\Local\Google\Chrome\User Data");
-                options.AddArguments(@"profile-directory=Default");
-
+                options.AddArguments($"user-data-dir={chromeExePath}");
+                options.AddArguments($"profile-directory={chromeProfilePath}");
 
                 return new ChromeDriver(options);
             });
 
             // Register other services
-            services.AddSingleton<IEmailNotificationService, SNSEmailService>();
+            //services.AddSingleton<IEmailNotificationService, SNSEmailService>();
+            services.AddSingleton<IEmailNotificationService, MailgunEmailService>();
             services.AddSingleton<ILoggerService, LoggerService>();
             services.AddSingleton<IComponentService, ComponentService>();
             services.AddSingleton<IConnectionService, ConnectionService>();

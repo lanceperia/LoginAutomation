@@ -10,6 +10,7 @@ namespace EmaptaLoginAutomation.Services
     {
         public void SendEmail(string subject, string message)
         {
+
             var accessKeyId = Environment.GetEnvironmentVariable("PERSONAL_AWS_ACCESS_KEY_ID");
             var secretAccessKey = Environment.GetEnvironmentVariable("PERSONAL_AWS_SECRET_ACCESS_KEY");
             var topicArn = Environment.GetEnvironmentVariable("PERSONAL_AWS_SNS_ARN");
@@ -19,9 +20,11 @@ namespace EmaptaLoginAutomation.Services
                 string.IsNullOrWhiteSpace(topicArn))
             {
                 loggerService.Error("AWS SNS is not properly setup!");
+
                 return;
             }
 
+            loggerService.Information($"Sending Email...");
             var credentials = new BasicAWSCredentials(accessKeyId, secretAccessKey);
             var client = new AmazonSimpleNotificationServiceClient(credentials, RegionEndpoint.APSoutheast1);
             var request = new PublishRequest
@@ -33,6 +36,8 @@ namespace EmaptaLoginAutomation.Services
             var response = client.PublishAsync(request).Result;
 
             loggerService.Information($"Status: {response.HttpStatusCode}");
+
+            return;
         }
     }
 }
