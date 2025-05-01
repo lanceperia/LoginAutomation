@@ -9,8 +9,8 @@ Below is the PowerShell script you can use to add environment variables:
 $envVars = @{
 
     # Needed to setup chrome profile.
-    "CHROME_EXEPATH" = "C:\Program Files\Google\Chrome\Application\chrome.exe"
-    "CHROME_PROFILEPATH" = "Profile 1"
+    "CHROME_USERDATADIR" = "C:\Users\AppData\Local\Google\Chrome\User Data"
+    "CHROME_PROFILEDIR" = "Profile 1"
 
     # Required if email provider is Mailgun
     "MAILGUN_ENDPOINT" = "your_mailgun_endpoint"
@@ -31,5 +31,6 @@ foreach ($key in $envVars.Keys) {
 ```
 Both of these can be found by navigating to `chrome://version/`:  
 
-**CHROME_EXEPATH**: ![image](https://github.com/user-attachments/assets/5824ec16-f58f-46d1-b8d2-39f75b1f9d78)  
-**CHROME_PROFILEPATH**: ![image](https://github.com/user-attachments/assets/3db5f616-c17c-4d71-b584-704322a1a025)
+**CHROME_USERDATADIR**: ![image](https://github.com/user-attachments/assets/b5bea65b-33fb-4363-b62e-274667753d92)
+
+**CHROME_PROFILEDIR**: ![image](https://github.com/user-attachments/assets/3db5f616-c17c-4d71-b584-704322a1a025)
