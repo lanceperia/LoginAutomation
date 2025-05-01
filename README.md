@@ -28,12 +28,6 @@ $envVars = @{
 foreach ($key in $envVars.Keys) {
     [System.Environment]::SetEnvironmentVariable($key, $envVars[$key], [System.EnvironmentVariableTarget]::User)
 }
-
-# Verify environment variables
-foreach ($key in $envVars.Keys) {
-    Write-Host "$key = $($env:$key)"
-}
-
 ```
 Both of these can be found by navigating to `chrome://version/`:  
 
