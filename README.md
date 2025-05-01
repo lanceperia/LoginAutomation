@@ -1,5 +1,7 @@
 ## Prerequisites:
-This console application requires specific configurations before running. These configurations utilize system environment variables. Below is the PowerShell script you can use to add environment variables:
+This console application requires specific configurations before running. These configurations utilize system environment variables.  
+
+Below is the PowerShell script you can use to add environment variables:
 
 ``` Powershell
 
